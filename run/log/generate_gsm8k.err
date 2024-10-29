@@ -1,0 +1,8 @@
+/home/yuweia/anaconda3/envs/flash/lib/python3.10/site-packages/transformers/utils/hub.py:127: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+2024-10-29:00:49:03,433 INFO     [evaluator.py:164] Setting random seed to 0 | Setting numpy seed to 1234 | Setting torch manual seed to 1234 | Setting fewshot manual seed to 1234
+2024-10-29:00:49:03,434 INFO     [evaluator.py:217] Using pre-initialized model
+2024-10-29:00:49:17,503 INFO     [task.py:415] Building contexts for gsm8k_cot on rank 0...
+  0%|          | 0/10 [00:00<?, ?it/s] 70%|███████   | 7/10 [00:00<00:00, 64.13it/s]100%|██████████| 10/10 [00:00<00:00, 64.29it/s]
+2024-10-29:00:49:17,659 INFO     [evaluator.py:489] Running generate_until requests
+  0%|          | 0/10 [00:00<?, ?it/s]100%|██████████| 10/10 [00:00<00:00, 260.37it/s]

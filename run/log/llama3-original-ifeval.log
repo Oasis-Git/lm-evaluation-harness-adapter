@@ -1,0 +1,8 @@
+hf (pretrained=meta-llama/Meta-Llama-3-8B-Instruct,trust_remote_code=True), gen_kwargs: (None), limit: 200.0, num_fewshot: None, batch_size: 1
+|Tasks |Version|Filter|n-shot|        Metric         |   |Value |   |Stderr|
+|------|------:|------|-----:|-----------------------|---|-----:|---|------|
+|ifeval|      2|none  |     0|inst_level_loose_acc   |↑  |0.6101|±  |N/A   |
+|      |       |none  |     0|inst_level_strict_acc  |↑  |0.5346|±  |N/A   |
+|      |       |none  |     0|prompt_level_loose_acc |↑  |0.4750|±  |0.0354|
+|      |       |none  |     0|prompt_level_strict_acc|↑  |0.3850|±  |0.0345|
+

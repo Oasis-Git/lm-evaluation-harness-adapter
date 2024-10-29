@@ -1,0 +1,6 @@
+hf (pretrained=meta-llama/Meta-Llama-3-8B-Instruct), gen_kwargs: (None), limit: 200.0, num_fewshot: None, batch_size: 1
+|  Tasks  |Version|     Filter     |n-shot|  Metric   |   |Value|   |Stderr|
+|---------|------:|----------------|-----:|-----------|---|----:|---|-----:|
+|gsm8k_cot|      3|flexible-extract|     8|exact_match|↑  |0.745|±  |0.0309|
+|         |       |strict-match    |     8|exact_match|↑  |0.730|±  |0.0315|
+

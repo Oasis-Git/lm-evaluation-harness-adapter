@@ -1,0 +1,45 @@
+/home/yuweia/anaconda3/envs/flash/lib/python3.10/site-packages/transformers/utils/hub.py:127: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+2024-10-28:19:43:17,900 INFO     [__main__.py:272] Verbosity set to INFO
+2024-10-28:19:43:25,467 WARNING  [__main__.py:312]  --limit SHOULD ONLY BE USED FOR TESTING.REAL METRICS SHOULD NOT BE COMPUTED USING LIMIT.
+2024-10-28:19:43:25,468 INFO     [__main__.py:369] Selected Tasks: ['xsum']
+2024-10-28:19:43:25,473 INFO     [evaluator.py:152] Setting random seed to 0 | Setting numpy seed to 1234 | Setting torch manual seed to 1234
+2024-10-28:19:43:25,473 INFO     [evaluator.py:189] Initializing hf model, with arguments: {'pretrained': 'meta-llama/Meta-Llama-3-8B-Instruct', 'trust_remote_code': True}
+2024-10-28:19:43:25,669 INFO     [huggingface.py:170] Using device 'cuda:0'
+Downloading shards:   0%|          | 0/4 [00:00<?, ?it/s]Downloading shards: 100%|██████████| 4/4 [00:00<00:00, 3176.30it/s]
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:01<00:05,  1.94s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:03<00:03,  1.86s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:05<00:01,  1.80s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:05<00:00,  1.29s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:05<00:00,  1.49s/it]
+Traceback (most recent call last):
+  File "/home/yuweia/anaconda3/envs/flash/bin/lm_eval", line 8, in <module>
+    sys.exit(cli_evaluate())
+  File "/home/yuweia/anaconda3/envs/flash/lib/python3.10/site-packages/lm_eval/__main__.py", line 375, in cli_evaluate
+    results = evaluator.simple_evaluate(
+  File "/home/yuweia/anaconda3/envs/flash/lib/python3.10/site-packages/lm_eval/utils.py", line 395, in _wrapper
+    return fn(*args, **kwargs)
+  File "/home/yuweia/anaconda3/envs/flash/lib/python3.10/site-packages/lm_eval/evaluator.py", line 221, in simple_evaluate
+    task_dict = get_task_dict(tasks, task_manager)
+  File "/home/yuweia/anaconda3/envs/flash/lib/python3.10/site-packages/lm_eval/tasks/__init__.py", line 444, in get_task_dict
+    task_name_from_string_dict = task_manager.load_task_or_group(
+  File "/home/yuweia/anaconda3/envs/flash/lib/python3.10/site-packages/lm_eval/tasks/__init__.py", line 287, in load_task_or_group
+    collections.ChainMap(*map(self._load_individual_task_or_group, task_list))
+  File "/home/yuweia/anaconda3/envs/flash/lib/python3.10/site-packages/lm_eval/tasks/__init__.py", line 178, in _load_individual_task_or_group
+    return load_task(task_config, task=name_or_config, group=parent_name)
+  File "/home/yuweia/anaconda3/envs/flash/lib/python3.10/site-packages/lm_eval/tasks/__init__.py", line 167, in load_task
+    task_object = ConfigurableTask(config=config)
+  File "/home/yuweia/anaconda3/envs/flash/lib/python3.10/site-packages/lm_eval/api/task.py", line 810, in __init__
+    self.download(self.config.dataset_kwargs)
+  File "/home/yuweia/anaconda3/envs/flash/lib/python3.10/site-packages/lm_eval/api/task.py", line 917, in download
+    self.dataset = datasets.load_dataset(
+  File "/home/yuweia/anaconda3/envs/flash/lib/python3.10/site-packages/datasets/load.py", line 2606, in load_dataset
+    builder_instance = load_dataset_builder(
+  File "/home/yuweia/anaconda3/envs/flash/lib/python3.10/site-packages/datasets/load.py", line 2277, in load_dataset_builder
+    dataset_module = dataset_module_factory(
+  File "/home/yuweia/anaconda3/envs/flash/lib/python3.10/site-packages/datasets/load.py", line 1923, in dataset_module_factory
+    raise e1 from None
+  File "/home/yuweia/anaconda3/envs/flash/lib/python3.10/site-packages/datasets/load.py", line 1896, in dataset_module_factory
+    ).get_module()
+  File "/home/yuweia/anaconda3/envs/flash/lib/python3.10/site-packages/datasets/load.py", line 1532, in get_module
+    trust_remote_code = resolve_trust_remote_code(self.trust_remote_code, self.name)
+  File "/home/yuweia/anaconda3/envs/flash/lib/python3.10/site-packages/datasets/load.py", line 134, in resolve_trust_remote_code
+    raise ValueError(
+ValueError: The repository for unitxt/data contains custom code which must be executed to correctly load the dataset. You can inspect the repository content at https://hf.co/datasets/unitxt/data.
+Please pass the argument `trust_remote_code=True` to allow custom code to be run.
