@@ -1,8 +1,8 @@
 /home/yuweia/anaconda3/envs/flash/lib/python3.10/site-packages/transformers/utils/hub.py:127: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
   warnings.warn(
-2024-10-29:00:49:03,433 INFO     [evaluator.py:164] Setting random seed to 0 | Setting numpy seed to 1234 | Setting torch manual seed to 1234 | Setting fewshot manual seed to 1234
-2024-10-29:00:49:03,434 INFO     [evaluator.py:217] Using pre-initialized model
-2024-10-29:00:49:17,503 INFO     [task.py:415] Building contexts for gsm8k_cot on rank 0...
-  0%|          | 0/10 [00:00<?, ?it/s] 70%|███████   | 7/10 [00:00<00:00, 64.13it/s]100%|██████████| 10/10 [00:00<00:00, 64.29it/s]
-2024-10-29:00:49:17,659 INFO     [evaluator.py:489] Running generate_until requests
-  0%|          | 0/10 [00:00<?, ?it/s]100%|██████████| 10/10 [00:00<00:00, 260.37it/s]
+2024-10-29:15:24:04,682 INFO     [evaluator.py:164] Setting random seed to 0 | Setting numpy seed to 1234 | Setting torch manual seed to 1234 | Setting fewshot manual seed to 1234
+2024-10-29:15:24:04,682 INFO     [evaluator.py:217] Using pre-initialized model
+2024-10-29:15:24:11,885 INFO     [task.py:415] Building contexts for gsm8k_cot on rank 0...
+  0%|          | 0/200 [00:00<?, ?it/s]  7%|▋         | 14/200 [00:00<00:01, 135.68it/s] 14%|█▍        | 28/200 [00:00<00:01, 136.53it/s] 21%|██        | 42/200 [00:00<00:01, 136.77it/s] 28%|██▊       | 56/200 [00:00<00:01, 136.69it/s] 35%|███▌      | 70/200 [00:00<00:00, 137.26it/s] 42%|████▏     | 84/200 [00:00<00:00, 137.82it/s] 49%|████▉     | 98/200 [00:00<00:00, 138.22it/s] 56%|█████▌    | 112/200 [00:00<00:00, 138.48it/s] 63%|██████▎   | 126/200 [00:00<00:00, 138.59it/s] 70%|███████   | 140/200 [00:01<00:00, 138.76it/s] 77%|███████▋  | 154/200 [00:01<00:00, 138.90it/s] 84%|████████▍ | 168/200 [00:01<00:00, 139.01it/s] 91%|█████████ | 182/200 [00:01<00:00, 139.10it/s] 98%|█████████▊| 196/200 [00:01<00:00, 139.10it/s]100%|██████████| 200/200 [00:01<00:00, 138.32it/s]
+2024-10-29:15:24:13,334 INFO     [evaluator.py:489] Running generate_until requests
+  0%|          | 0/200 [00:00<?, ?it/s]  0%|          | 1/200 [00:00<00:35,  5.53it/s]100%|██████████| 200/200 [00:00<00:00, 843.63it/s]

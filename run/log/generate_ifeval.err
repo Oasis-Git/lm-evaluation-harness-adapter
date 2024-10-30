@@ -1,0 +1,25 @@
+/home/yuweia/anaconda3/envs/flash/lib/python3.10/site-packages/transformers/utils/hub.py:127: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+2024-10-29:23:07:10,576 INFO     [evaluator.py:164] Setting random seed to 0 | Setting numpy seed to 1234 | Setting torch manual seed to 1234 | Setting fewshot manual seed to 1234
+2024-10-29:23:07:10,577 INFO     [evaluator.py:217] Using pre-initialized model
+Downloading readme:   0%|          | 0.00/5.52k [00:00<?, ?B/s]Downloading readme: 100%|██████████| 5.52k/5.52k [00:00<00:00, 151kB/s]
+Downloading data:   0%|          | 0.00/207k [00:00<?, ?B/s]Downloading data: 100%|██████████| 207k/207k [00:00<00:00, 2.59MB/s]
+Generating train split:   0%|          | 0/541 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 541/541 [00:00<00:00, 24582.57 examples/s]
+2024-10-29:23:07:20,665 WARNING  [task.py:325] [Task: ifeval] has_training_docs and has_validation_docs are False, using test_docs as fewshot_docs but this is not recommended.
+2024-10-29:23:07:20,665 WARNING  [task.py:325] [Task: ifeval] has_training_docs and has_validation_docs are False, using test_docs as fewshot_docs but this is not recommended.
+2024-10-29:23:07:20,718 INFO     [task.py:415] Building contexts for ifeval on rank 0...
+  0%|          | 0/200 [00:00<?, ?it/s]100%|██████████| 200/200 [00:00<00:00, 86302.55it/s]
+2024-10-29:23:07:20,740 INFO     [evaluator.py:489] Running generate_until requests
+  0%|          | 0/200 [00:00<?, ?it/s] 56%|█████▋    | 113/200 [00:00<00:00, 1124.73it/s]100%|██████████| 200/200 [00:00<00:00, 1506.67it/s]
+2024-10-29:23:07:21,314 ERROR    [instructions.py:178] Unable to detect language for text ! due to No features in text.
+2024-10-29:23:07:21,314 ERROR    [instructions.py:178] Unable to detect language for text ! due to No features in text.
+2024-10-29:23:07:21,318 ERROR    [instructions.py:178] Unable to detect language for text ! due to No features in text.
+2024-10-29:23:07:21,318 ERROR    [instructions.py:178] Unable to detect language for text ! due to No features in text.
+2024-10-29:23:07:21,339 ERROR    [instructions.py:178] Unable to detect language for text ! due to No features in text.
+2024-10-29:23:07:21,339 ERROR    [instructions.py:178] Unable to detect language for text ! due to No features in text.
+2024-10-29:23:07:21,349 ERROR    [instructions.py:178] Unable to detect language for text ! due to No features in text.
+2024-10-29:23:07:21,349 ERROR    [instructions.py:178] Unable to detect language for text ! due to No features in text.
+2024-10-29:23:07:21,354 ERROR    [instructions.py:178] Unable to detect language for text ! due to No features in text.
+2024-10-29:23:07:21,354 ERROR    [instructions.py:178] Unable to detect language for text ! due to No features in text.
+2024-10-29:23:07:21,361 ERROR    [instructions.py:178] Unable to detect language for text ! due to No features in text.
+2024-10-29:23:07:21,361 ERROR    [instructions.py:178] Unable to detect language for text ! due to No features in text.

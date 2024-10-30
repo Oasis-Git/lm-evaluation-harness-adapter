@@ -1,0 +1,6 @@
+batchsize is 8
+|  Tasks  |Version|     Filter     |n-shot|  Metric   |   |Value|   |Stderr|
+|---------|------:|----------------|-----:|-----------|---|----:|---|-----:|
+|gsm8k_cot|      3|flexible-extract|     8|exact_match|↑  | 0.72|±  |0.0318|
+|         |       |strict-match    |     8|exact_match|↑  | 0.71|±  |0.0322|
+
