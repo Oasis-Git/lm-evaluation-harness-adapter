@@ -8,3 +8,4 @@
 /home/yuweia/anaconda3/envs/flash/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:572: UserWarning: `do_sample` is set to `False`. However, `top_p` is set to `0.9` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `top_p`.
   warnings.warn(
 Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+  2%|▏         | 1/50 [01:26<1:10:37, 86.47s/it]Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.

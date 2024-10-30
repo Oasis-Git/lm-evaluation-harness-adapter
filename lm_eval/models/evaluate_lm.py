@@ -35,7 +35,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-class GenerateLM(TemplateLM):
+class EvaluateLM(TemplateLM):
     """
     Template class for generation jsonl files for the Generate task.
     """
@@ -472,6 +472,12 @@ class GenerateLM(TemplateLM):
         # logger.info('whole: {}'.format(context + continuation))
         whole_enc = self.tok_encode(context + continuation, add_special_tokens=False)
         context_enc = self.tok_encode(context, add_special_tokens=False)
+        part_enc = self.tok_encode(continuation, add_special_tokens=False)
+        # logger.info('whole_enc: {}'.format(whole_enc))
+        # logger.info('context_enc: {}'.format(context_enc))
+        # logger.info('part_enc: {}'.format(part_enc))
+        # whole_enc = self.tok_encode(context + continuation)
+        # context_enc = self.tok_encode(context, add_special_tokens=False)
         context_enc_len = len(context_enc)
         continuation_enc = whole_enc[context_enc_len:]
         return context_enc, continuation_enc
@@ -646,12 +652,7 @@ class GenerateLM(TemplateLM):
                 if n_spaces > 0:
                     continuation = context[-n_spaces:] + continuation
                     context = context[:-n_spaces]
-                logger.info("p: {}".format(p))
                 self.processor.eval([context + continuation])
-                logger.info("context_enc len: {}".format(len(context_enc)))
-                logger.info("continuation_enc len: {}".format(len(continuation_enc)))
-                # logger.info('continuation_enc: {}'.format(continuation_enc))
-                # logger.info('context_enc: {}'.format(context_enc))
                 if self.AUTO_MODEL_CLASS == transformers.AutoModelForCausalLM:
                     inp = torch.tensor(
                         (context_enc + continuation_enc)[-(self.max_length + 1) :][:-1],
@@ -846,34 +847,44 @@ class GenerateLM(TemplateLM):
                 )
             if not until:
                 until = [self.tok_decode(self.eot_token_id)]
-            if "max_gen_toks" in kwargs.keys():
-                max_gen_toks = kwargs.pop("max_gen_toks")
-            else:
-                max_gen_toks = self.max_gen_toks
-            kwargs["max_new_tokens"] = max_gen_toks
-            bsz = len(contexts)
-            cont = torch.zeros((bsz, 1)).long()
-            self.processor.process(contexts, until, kwargs)
-
-            cont_toks_list = cont.tolist()
-            for cont_toks, context in zip(cont_toks_list, contexts):
-                # discard context + left-padding toks if using causal decoder-only LM
-                if self.AUTO_MODEL_CLASS == transformers.AutoModelForCausalLM:
-                    cont_toks = cont_toks[-1]
-
-                s = self.tok_decode(cont_toks)
-
-                # use secondary stop seqs to cut off should-have-been-stopped content post-hoc
+            for context in contexts:
+                decode_output = self.processor.process(context)
                 for term in until:
                     if len(term) > 0:
-                        # ignore '' separator,
-                        # for seq2seq case where self.tok_decode(self.eot_token_id) = ''
-                        s = s.split(term)[0]
-
-                res.append(s)
-
-                self.cache_hook.add_partial("generate_until", (context, gen_kwargs), s)
+                        decode_output = decode_output.split(term)[0]
+                res.append(decode_output)
+                self.cache_hook.add_partial(
+                    "generate_until", (context, gen_kwargs), decode_output
+                )
                 pbar.update(1)
+            # if "max_gen_toks" in kwargs.keys():
+            #     max_gen_toks = kwargs.pop("max_gen_toks")
+            # else:
+            #     max_gen_toks = self.max_gen_toks
+            # kwargs["max_gen_toks"] = max_gen_toks
+            # bsz = len(contexts)
+            # cont = torch.zeros((bsz, 1)).long()
+            # self.processor.process(contexts, until, kwargs)
+
+            # cont_toks_list = cont.tolist()
+            # for cont_toks, context in zip(cont_toks_list, contexts):
+            #     # discard context + left-padding toks if using causal decoder-only LM
+            #     if self.AUTO_MODEL_CLASS == transformers.AutoModelForCausalLM:
+            #         cont_toks = cont_toks[-1]
+
+            #     s = self.tok_decode(cont_toks)
+
+            #     # use secondary stop seqs to cut off should-have-been-stopped content post-hoc
+            #     for term in until:
+            #         if len(term) > 0:
+            #             # ignore '' separator,
+            #             # for seq2seq case where self.tok_decode(self.eot_token_id) = ''
+            #             s = s.split(term)[0]
+
+            #     res.append(s)
+
+            #     self.cache_hook.add_partial("generate_until", (context, gen_kwargs), s)
+            #     pbar.update(1)
         # reorder this group of results back to original unsorted form
         res = re_ords.get_original(res)
 
