@@ -33,8 +33,8 @@ The framework is structured around three main scripts:
 Clone the repository and install the required dependencies:
 
 ```bash
-git clone https://github.com/yourusername/lm-eval-adapter.git
-cd lm-eval-adapter
+git clone https://github.com/Oasis-Git/lm-evaluation-harness-adapter.git
+cd lm-evaluation-harness-adapter
 pip install -r requirements.txt
 python setup.py install
 
@@ -51,6 +51,6 @@ This section tracks the status of tasks tested with **LM Eval Adapter**. The sta
 |-------------------------|-----------------|
 | ifeval               | 🟢 Passed       |
 | gsm8k                | 🟢 Passed        |
-| Winograd Schema        | 🔴 Failed       |
+| xsum        | 🟡 Testing       |
 
 Feel free to contribute to improving task support or report issues for any tasks!
