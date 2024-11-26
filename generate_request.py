@@ -21,7 +21,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     processor = write_request_processor(args.request_file_path)
-    model = GenerateLM(pretrained=args.model, processor=processor)
+    model = GenerateLM(pretrained=args.model, processor=processor, batch_size=args.batchsize)
 
     task_manager = lm_eval.tasks.TaskManager("INFO")
     task_list = [args.task_name]

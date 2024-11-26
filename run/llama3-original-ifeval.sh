@@ -15,4 +15,4 @@ lm_eval --model hf \
     --tasks ifeval \
     --device cuda:0 \
     --batch_size 1 \
-    --limit 200
+    --limit 3

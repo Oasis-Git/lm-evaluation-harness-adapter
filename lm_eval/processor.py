@@ -30,7 +30,7 @@ class read_responses_processor:
     def process(self, context):
         for response in self.corpus:
             if response["request"]["context"] == context:
-                s = response["response"]["response"]
+                s = response["response"]
                 context_length = len(context)
                 return s[context_length:]
         print("No response found for context: ", context)

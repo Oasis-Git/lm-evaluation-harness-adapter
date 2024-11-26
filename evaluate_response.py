@@ -21,7 +21,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     processor = read_responses_processor(args.response_file_path)
-    model = EvaluateLM(pretrained=args.model, processor=processor)
+    model = EvaluateLM(pretrained=args.model, processor=processor, batch_size=args.batchsize)
 
     task_manager = lm_eval.tasks.TaskManager("INFO")
     task_list = [args.task_name]
