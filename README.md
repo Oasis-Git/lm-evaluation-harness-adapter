@@ -51,6 +51,8 @@ This section tracks the status of tasks tested with **LM Eval Adapter**. The sta
 |-------------------------|-----------------|
 | ifeval               | 🟢 Passed       |
 | gsm8k                | 🟢 Passed        |
-| xsum        | 🟡 Testing       |
+| xsum        | 🟢 Passed       |
+| triviaqa        | 🟢 Passed       |
+| nq_open        | 🟢 Passed       |
 
 Feel free to contribute to improving task support or report issues for any tasks!

@@ -21,20 +21,16 @@ def stop_sequences_criteria(
     initial_decoder_input_length: int,
     batch_size: int,
 ) -> transformers.StoppingCriteriaList:
-    return transformers.StoppingCriteriaList(
-        [
-            *[
-                MultiTokenEOSCriteria(
-                    sequence, tokenizer, initial_decoder_input_length, batch_size
-                )
-                for sequence in stop_sequences
-            ],
-        ]
-    )
-    
-def configure_pad_token(
-    tokenizer,
-):
+    return transformers.StoppingCriteriaList([
+        *[
+            MultiTokenEOSCriteria(sequence, tokenizer,
+                                  initial_decoder_input_length, batch_size)
+            for sequence in stop_sequences
+        ],
+    ])
+
+
+def configure_pad_token(tokenizer, ):
     """
     This function checks if the (Hugging Face) tokenizer has a padding token and sets it if not present.
     Some tokenizers require special handling.
@@ -58,7 +54,8 @@ def configure_pad_token(
     else:
         print("No padding token found. Setting padding token to eos token.")
         exit(1)
-        
+
+
 def get_dtype(dtype: Union[str, torch.dtype]) -> torch.dtype:
     """Converts `dtype` from `str` to torch.dtype when possible. Does not use an instantiated HF AutoConfig"""
     if isinstance(dtype, str) and dtype != "auto":
@@ -78,18 +75,18 @@ def main():
     parser.add_argument("--response_file_path", type=str, required=True)
 
     args = parser.parse_args()
-    model = AutoModelForCausalLM.from_pretrained(args.model, trust_remote_code=True)
+    model = AutoModelForCausalLM.from_pretrained(args.model,
+                                                 trust_remote_code=True,
+                                                 torch_dtype='auto')
     print(next(model.parameters()).dtype)
     tokenizer = AutoTokenizer.from_pretrained(args.model)
     configure_pad_token(tokenizer)
     tokenizer.padding_side = 'left'
     model.to(args.device)
     model.eval()
-    
-    special_tokens_kwargs = {
-        "add_special_tokens": False
-    }
-    
+
+    special_tokens_kwargs = {"add_special_tokens": False}
+
     # read all the requests
     requests = []
     with open(args.request_file_path, "r") as f:
@@ -100,33 +97,39 @@ def main():
     responses = []
     for i in tqdm(range(0, len(requests), args.batchsize)):
         # create context
-        context = [request["context"] for request in requests[i : i + args.batchsize]]
+        context = [
+            request["context"] for request in requests[i:i + args.batchsize]
+        ]
         until = requests[i]["until"]
         # create kwargs with left over keys
         kwargs = {}
-        for request in requests[i : i + args.batchsize]:
-            kwargs.update(
-                {k: v for k, v in request.items() if k not in ["context", "until"]}
-            )
+        for request in requests[i:i + args.batchsize]:
+            kwargs.update({
+                k: v
+                for k, v in request.items() if k not in ["context", "until"]
+            })
 
         # tokenize the context
-        inputs = tokenizer(context, truncation=False,
-            padding="longest",
-            return_tensors="pt", **special_tokens_kwargs)
+        inputs = tokenizer(context,
+                           truncation=False,
+                           padding="longest",
+                           return_tensors="pt",
+                           **special_tokens_kwargs)
         inputs = {k: v.to(args.device) for k, v in inputs.items()}
         if kwargs.get("do_sample", False) == False:
-            # delete the top_p and top_k arguments 
+            # delete the top_p and top_k arguments
             kwargs.pop("top_p", None)
             kwargs.pop("top_k", None)
-            kwargs.pop("temperature", None) 
+            kwargs.pop("temperature", None)
         stopping_criteria = stop_sequences_criteria(
-            tokenizer, until, inputs["input_ids"].shape[1], inputs["input_ids"].shape[0]
-        )
+            tokenizer, until, inputs["input_ids"].shape[1],
+            inputs["input_ids"].shape[0])
         if kwargs.get("max_new_tokens", None) is not None:
-            kwargs["max_length"] = inputs["input_ids"].shape[1] + kwargs["max_new_tokens"]
+            kwargs["max_length"] = inputs["input_ids"].shape[1] + kwargs[
+                "max_new_tokens"]
             kwargs.pop("max_new_tokens", None)
-        
-        output = model.generate(**inputs, 
+
+        output = model.generate(**inputs,
                                 stopping_criteria=stopping_criteria,
                                 pad_token_id=tokenizer.pad_token_id,
                                 **kwargs)
