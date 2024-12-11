@@ -1,7 +1,5 @@
 # Language Model Evaluation Harness Adapter
 
-# LM Eval Adapter
-
 This repository is a fork of [lm-eval](https://github.com/eleutherai/lm-eval), an evaluation framework for large language models (LLMs). The primary goal of **LM Eval Adapter** is to enhance flexibility and usability, enabling multi-LLM evaluation and supporting approximate LLM inference techniques.
 
 ## Key Features
